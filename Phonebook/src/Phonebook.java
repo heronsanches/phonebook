@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -156,7 +157,7 @@ public class Phonebook {
 		
 		for(Entry<String, Contact> c: ec)
 			System.out.println("key: "+c.getKey()+"\n"+c.getValue().getName()+"\n"+
-				c.getValue().getTelNumber()+"\n");
+				c.getValue().getTelNumber()+"\n"+c.getValue().getEmail()+"\n");
 			
 	}
 	
@@ -173,10 +174,14 @@ public class Phonebook {
 	public void menuOperations(){
 
 	 Scanner scanner = new Scanner(System.in);
-	 String name = "";
-	 String telNumber = "";
-	 String newName = "";
-	 String newTelNumber = "";
+	 String name = null;
+	 String telNumber = null;
+	 String email = null;
+	 //Date birthDate = null;
+	 String newName = null;
+	 String newTelNumber = null;
+	 String newEmail = null;
+	 //Date newBirthDate = null;
 	 char opcao;
 	
 	//MENU
@@ -188,7 +193,7 @@ public class Phonebook {
 		System.out.println("2-edit");
 		System.out.println("3-delete");
 		System.out.println("4-search");
-		//System.out.println("5-showAll");//for testing
+		//System.out.println("5-showAll");
 		System.out.println("6-exit");//
 		
 		opcao = scanner.next().charAt(0);
@@ -199,9 +204,17 @@ public class Phonebook {
 			 scanner = new Scanner(System.in);
 			 System.out.print("nome: ");
 			 name = scanner.nextLine();
+			 
 			 System.out.print("telefone: ");
 			 telNumber = scanner.nextLine();
-			 insertContact(new Contact(name, telNumber));
+			 
+			 System.out.print("email: ");
+			 email = scanner.nextLine();
+			 
+			 /*System.out.print("data de aniversário: ");
+			 birthDate = scanner.nextLine();*/
+			 
+			 insertContact(new Contact(name, telNumber, email));
 			 
 			break;
 			case ('2'): //edit
@@ -218,7 +231,10 @@ public class Phonebook {
 					System.out.print("novo telefone: ");
 					newTelNumber = scanner.nextLine();
 					
-					update(name, new Contact(newName, newTelNumber));
+					System.out.print("novo email: ");
+					newEmail = scanner.nextLine();
+					
+					update(name, new Contact(newName, newTelNumber, newEmail));
 					
 				}else{
 					
@@ -251,7 +267,8 @@ public class Phonebook {
 				name = scanner.nextLine();
 
 				for(Entry<String, Contact> c: search(name).entrySet())
-					System.out.println(c.getKey()+"\n"+c.getValue().getTelNumber()+"\n");
+					System.out.println(c.getValue().getName()+"\n"+c.getValue().getTelNumber()+"\n"+
+						c.getValue().getEmail()+"\n");
 				
 				System.out.print("pressione enter para voltar ao menu");
 				scanner.nextLine();
