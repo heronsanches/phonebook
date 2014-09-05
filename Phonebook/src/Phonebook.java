@@ -60,7 +60,7 @@ public class Phonebook {
 		
 		if(key.equals(contact.getName())){
 			
-			contacts.put(key, new Contact(contact.getName(), contact.getTelNumber()));
+			contacts.put(key, contact);
 			
 		}else{
 			
