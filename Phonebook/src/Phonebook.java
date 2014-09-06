@@ -4,7 +4,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -177,10 +176,12 @@ public class Phonebook {
 	 String name = null;
 	 String telNumber = null;
 	 String email = null;
+	 String birthDate = null;
 	 //Date birthDate = null;
 	 String newName = null;
 	 String newTelNumber = null;
 	 String newEmail = null;
+	 String newBirthDate = null;
 	 //Date newBirthDate = null;
 	 char opcao;
 	
@@ -211,13 +212,16 @@ public class Phonebook {
 			 System.out.print("email: ");
 			 email = scanner.nextLine();
 			 
+			 System.out.print("digite a data de aniversario no formato dd/mm/aaaa: ");
+			 birthDate = scanner.nextLine();
+				
 			 /*System.out.print("data de aniversário: ");
 			 birthDate = scanner.nextLine();*/
 			 
-			 insertContact(new Contact(name, telNumber, email));
+			 insertContact(new Contact(name, telNumber, email, birthDate));
 			 
 			break;
-			case ('2'): //edit
+			case ('2'): //update
 				
 				scanner = new Scanner(System.in);
 				System.out.print("nome: ");
@@ -234,7 +238,10 @@ public class Phonebook {
 					System.out.print("novo email: ");
 					newEmail = scanner.nextLine();
 					
-					update(name, new Contact(newName, newTelNumber, newEmail));
+					System.out.print("digite a nova data de aniversario no formato dd/mm/aaaa: ");
+					newBirthDate = scanner.nextLine();
+					
+					update(name, new Contact(newName, newTelNumber, newEmail, newBirthDate));
 					
 				}else{
 					
@@ -267,8 +274,9 @@ public class Phonebook {
 				name = scanner.nextLine();
 
 				for(Entry<String, Contact> c: search(name).entrySet())
-					System.out.println(c.getValue().getName()+"\n"+c.getValue().getTelNumber()+"\n"+
-						c.getValue().getEmail()+"\n");
+					System.out.println("nome: "+c.getValue().getName()+"\ntelefone: "+c.getValue().
+						getTelNumber()+"\nemail: "+c.getValue().getEmail()+"\ndata de aniversario: "+
+						c.getValue().getBirthDate()+"\n");
 				
 				System.out.print("pressione enter para voltar ao menu");
 				scanner.nextLine();
