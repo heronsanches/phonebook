@@ -1,4 +1,4 @@
 phonebook
 =========
 
-Esquente Linguagem para aplicações comerciais
+A simple activity of the course - Languages for Comercial Application.
